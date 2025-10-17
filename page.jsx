@@ -39,8 +39,16 @@ const skills = [
   { name: 'Figma', level: 'Advanced', icon: Figma, color: 'text-fuchsia-500' },
 ];
 
-// NOTE: This array is empty. You can fill this out to showcase your work.
-const projectsData = []; 
+// NOTE: I've added a sample project here to demonstrate the component structure.
+const projectsData = [
+  {
+    title: 'Real-Time Chat Application',
+    description: 'A full-stack messaging platform supporting instant, persistent, and secure communication between users. Built with scalable web socket infrastructure.',
+    githubUrl: 'https://github.com/omollojeremy/chat-app-repo',
+    liveUrl: '#', // Placeholder for live URL
+    techStack: ['Node.js', 'Express', 'Socket.IO', 'React', 'MongoDB', 'TypeScript'],
+  }
+]; 
 
 
 // Helper components for structure and styling
