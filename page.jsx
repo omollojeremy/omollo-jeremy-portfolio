@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-// Updated imports to include specific icons for technologies
+// Imports necessary for the components and functionality
 import { 
   Home, Code, Mail, Instagram, Github, ArrowUp, ChevronRight, Menu, X, 
   Terminal, Server, Atom, Flame, Aperture, GitBranch, Wind, Lightbulb, MessageSquare, 
-  Sunrise, Figma, LayoutList, Folder, Link // Added Folder for Projects and Link for external URLs
+  Sunrise, Figma, LayoutList, Folder, Link 
 } from 'lucide-react';
 
 // Define the FINAL URLs for easy management
@@ -15,7 +15,7 @@ const INSTAGRAM_URL = "https://instagram.com/still.jeremy_"; // Finalized Instag
 const sections = [
   { id: 'hero', name: 'Home', icon: Home },
   { id: 'skills', name: 'Skills', icon: Code },
-  { id: 'projects', name: 'Projects', icon: Folder }, // New Projects Section
+  { id: 'projects', name: 'Projects', icon: Folder },
 ];
 
 const skills = [
@@ -39,7 +39,8 @@ const skills = [
   { name: 'Figma', level: 'Advanced', icon: Figma, color: 'text-fuchsia-500' },
 ];
 
-const projectsData = []; // Removed all mock projects!
+// NOTE: This array is empty. You can fill this out to showcase your work.
+const projectsData = []; 
 
 
 // Helper components for structure and styling
@@ -107,7 +108,7 @@ const ProjectCard = ({ project }) => (
   </div>
 );
 
-// New Footer Component
+// Footer Component
 const Footer = () => (
   <footer className="py-12 mt-16 border-t border-gray-800 bg-gray-900/50 rounded-t-2xl">
     <div className="flex justify-center space-x-6 mb-6">
@@ -130,6 +131,9 @@ const App = () => {
 
   // Effect to observe sections for active link highlighting
   useEffect(() => {
+    // Check if running in a browser environment before accessing window/document
+    if (typeof window === 'undefined') return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -166,7 +170,9 @@ const App = () => {
 
   const handleNavClick = (id) => {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+    // This line ensures the mobile menu closes immediately after any link is clicked,
+    // including the "Home" link.
+    setIsMenuOpen(false); 
   };
 
   const NavItem = ({ sectionId, Icon, name }) => (
@@ -218,13 +224,15 @@ const App = () => {
     <div className="min-h-screen bg-black text-gray-100 font-sans">
       
       {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 z-50 p-4 bg-sky-600 text-white rounded-full transition-opacity duration-300 shadow-xl hover:bg-sky-500 ${showScrollToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-label="Scroll to top"
-      >
-        <ArrowUp size={24} />
-      </button>
+      {typeof window !== 'undefined' && (
+        <button
+          onClick={scrollToTop}
+          className={`fixed bottom-6 right-6 z-50 p-4 bg-sky-600 text-white rounded-full transition-opacity duration-300 shadow-xl hover:bg-sky-500 ${showScrollToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          aria-label="Scroll to top"
+        >
+          <ArrowUp size={24} />
+        </button>
+      )}
 
       {/* Mobile Menu Button */}
       <button 
@@ -318,7 +326,6 @@ const App = () => {
                       className={`p-3 transition duration-300 transform hover:scale-125 hover:bg-gray-800 rounded-full ${skill.color}`}
                     >
                       <IconComponent size={36} /> 
-                      {/* Removed: <h3 className="text-xl font-semibold text-white">{skill.name}</h3> */}
                     </div>
                   </div>
                 );
